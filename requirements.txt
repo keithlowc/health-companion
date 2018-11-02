@@ -1,0 +1,10 @@
+certifi==2018.10.15
+chardet==3.0.4
+idna==2.7
+PyJWT==1.6.4
+PySocks==1.6.8
+pytz==2018.7
+requests==2.20.0
+six==1.11.0
+twilio==6.19.2
+urllib3==1.24
