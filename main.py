@@ -3,6 +3,7 @@ from src.communications.twilio_coms import Twilio
 from src.temperature.temperature import TemperatureSensor
 from src.gas.gas_sensor import GasSensor
 from src.pulse.pulse_sensor import Pulsesensor
+import time
 
 def communication(celcius,farenheit,co2,tvoc,pulse):
 	data = 'The current Temperature is: {} C, {} F. The CO2 levels are: {} The TVOC levels are: {} The pulse range is: {}'.format(celcius,farenheit,co2,tvoc,pulse)
@@ -33,27 +34,27 @@ def gas_sensing():
 		return co2, tvoc
 
 def pulse_sensing():
+	p = Pulsesensor()
+	p.startAsyncBPM()
+	counter = 0
+	pulse_range = []
 	try:
-		p = Pulsesensor()
-		p.startAsyncBPM()
-		time = 0
-		pulse = []
-
-		while time <= 5:
-			time += 1
-			bpm = p.bpm
-			if bpm > 0:
-				print('BPM: %d' % bpm)
-				pulse.append(bpm)
-			else:
-				print('HEARTBEAT NOT FOUND!')
-			time.sleep(1)
+		x = input('Ready To start HEARTBEAT sensing? Y/N')
+		if x.upper() == 'Y':
+			while counter <= 10:
+				counter += 1
+				bpm = p.BPM
+				if bpm > 0:
+					print("BPM: %d" % bpm)
+					pulse_range.append(bpm)
+				else:
+					print("HEARTBEAT not found - setting to 0")
+					pulse_range.append(0)
+				time.sleep(1)
+			p.stopAsyncBPM()
+			return str(pulse_range)
+	except:
 		p.stopAsyncBPM()
-		return str(pulse)
-	except Exception as e:
-		print('There was an ERROR in pulse sensing: ' + str(e))
-		pulse = 'Null'
-		return pulse
 
 def main():
 	# celcius, farenheit = temp()
