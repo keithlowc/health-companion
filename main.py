@@ -17,21 +17,17 @@ def communication(celcius,farenheit,co2,tvoc,pulse):
 	message.make_call()
 	message.send_text()
 
-# def temp():
-# 	temp = TemperatureSensor()
-# 	celcius, farenheit = temp.get_temp()
-# 	return celcius, farenheit
-
 def gas_sensing():
 	try:
 		gas = GasSensor()
-		co2, tvoc = gas.get_gas()
-		return co2, tvoc
+		co2, tvoc, temp = gas.get_gas()
+		return co2, tvoc, temp
 	except Exception as e:
 		print('There was an ERROR in gas sensing: ' + str(e))
 		co2 = 'Null'
 		tvoc = 'Null'
-		return co2, tvoc
+		temp = 'Null'
+		return co2, tvoc, temp
 
 def pulse_sensing():
 	p = Pulsesensor()
@@ -39,27 +35,35 @@ def pulse_sensing():
 	counter = 0
 	pulse_range = []
 	try:
-		x = input('Ready To start HEARTBEAT sensing? Y/N')
+		x = input('Ready To start HEARTBEAT sensing? Y/N ')
 		if x.upper() == 'Y':
-			while counter <= 10:
-				counter += 1
+			while counter <= 20:
 				bpm = p.BPM
 				if bpm > 0:
 					print("BPM: %d" % bpm)
 					pulse_range.append(bpm)
+					counter += 1
 				else:
-					print("HEARTBEAT not found - setting to 0")
-					pulse_range.append(0)
+					print("HEARTBEAT NOT FOUND ON TRY " + str(counter))
 				time.sleep(1)
 			p.stopAsyncBPM()
-			return str(pulse_range)
+			average = str(get_average_from_list(pulse_range))
+			return average
 	except:
 		p.stopAsyncBPM()
 
+def get_average_from_list(list_given):
+	total = 0
+	for x in list_given:
+		total = total + x
+	total = total / len(list_given)
+	return total
+
+
 def main():
-	# celcius, farenheit = temp()
-	co2, tvoc = gas_sensing()
+	co2, tvoc, temp = gas_sensing()
 	pulse = pulse_sensing()
-	communication(1,1,co2,tvoc, pulse)
+	print(pulse)
+	communication(temp,temp,co2,tvoc, pulse)
 
 main()
