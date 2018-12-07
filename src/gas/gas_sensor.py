@@ -24,10 +24,11 @@ class GasSensor:
 		    	TVOC_measurement = self.ccs.getTVOC()
 		    else:
 		    	print("THERE WAS AN ERROR MEASURING GAS!")
-		return CO2_measurement, TVOC_measurement
+		return CO2_measurement, TVOC_measurement, temp
 
 if __name__ == '__main__':
 	obj = GasSensor()
-	co2, tvoc = obj.get_gas()
+	co2, tvoc, temp = obj.get_gas()
 	print('The CO2 level is: ' + str(co2) + ' ppm\n')
 	print('The TVOC level is: ' + str(tvoc))
+	print('The temp is: ' + str(temp))
