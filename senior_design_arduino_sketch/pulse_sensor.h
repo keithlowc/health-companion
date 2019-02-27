@@ -36,7 +36,6 @@ class Pulse
         Serial.println("♥  A HeartBeat Happened ! ");
         Serial.print("BPM: ");
         Serial.println(myBPM);
-        return myBPM;
       }
     }
 
@@ -47,26 +46,18 @@ class Pulse
       int pulseValue = 0;
       float total;
 
+      for (i = 0; i < PulseAverageSize; i++)
+      {
+        Serial.print("Iteration # ");
+        Serial.println(i);
+        Serial.print("This is the current pulse value: ");
+        Serial.println(pulseValue);
+        pulseValue += PulseSensing();
+      }
 
-      pulseValue = PulseSensing();
-      Serial.println(pulseValue);
+      total = pulseValue / PulseAverageSize;
 
-      total += pulseValue;
-
+      Serial.println("This is the total: ");
       Serial.println(total);
-
-      // for (i = 0; i < PulseAverageSize; i++)
-      // {
-      //   Serial.print("Iteration # ");
-      //   Serial.println(i);
-      //   Serial.print("This is the current pulse value: ");
-      //   Serial.println(pulseValue);
-      //   pulseValue += PulseSensing();
-      // }
-
-      // total = pulseValue / PulseAverageSize;
-
-      // Serial.println("This is the total: ");
-      // Serial.println(total);
     }
 };

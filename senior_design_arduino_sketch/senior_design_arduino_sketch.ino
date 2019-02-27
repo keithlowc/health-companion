@@ -1,7 +1,7 @@
 #include "pulse_sensor.h";
 #include "temp_sensor.h";
 
-Pulse pulsing(0); // Analog input 
+Pulse pulsing(0,15); // Analog input 
 TemperatureSensor tempSensor; // Digital pin #2
 
 void setup()
