@@ -2,7 +2,7 @@
 *.log
 
 db.sqlite
-venv_flask
+venv_flask/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
