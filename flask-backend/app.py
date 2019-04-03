@@ -2,14 +2,21 @@ from flask import Flask, request, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from flask_marshmallow import Marshmallow
 from sqlalchemy.sql import func
+from flask_heroku import Heroku
+from flask_cors import CORS
+
 import os
 
 app = Flask(__name__)
 
-basedir = os.path.abspath(os.path.dirname(__file__))
+# basedir = os.path.abspath(os.path.dirname(__file__))
+# app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(basedir, 'db.sqlite')
 
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(basedir, 'db.sqlite')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
+CORS(app)
+
+heroku = Heroku(app)
 
 #db
 db = SQLAlchemy(app)
@@ -37,6 +44,10 @@ class DataSchema(ma.Schema):
 data_schema = DataSchema(strict=True)
 all_data_schema = DataSchema(many=True ,strict=True)
 
+@app.route('', methods['GET'])
+def initial():
+
+
 @app.route('/data',methods=['POST'])
 def add_data():
 	bpm = request.json['bpm']
@@ -59,7 +70,7 @@ def get_all_data():
 @app.route('/data/<id>', methods=['GET'])
 def get_data(id):
 	data = Data.query.get(id)
-	return data_schema.jsonify(product)
+	return data_schema.jsonify(data)
 
 #Update a product
 @app.route('/data/<id>',methods=['PUT'])
