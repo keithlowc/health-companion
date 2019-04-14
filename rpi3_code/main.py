@@ -83,6 +83,7 @@ def send_post_request(bpm, temp):
 
 	r = requests.post(url = API_ENDPOINT, json = all_data)
 	response = r.text
+	print(response)
 	print("Response was sent")
 
 def main():

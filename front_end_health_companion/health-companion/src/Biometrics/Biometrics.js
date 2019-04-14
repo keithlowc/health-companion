@@ -1,13 +1,20 @@
-import React from "react";
+import React, { Component } from "react";
+import "./Biometrics.css";
 
-const biometrics = props => {
-  return (
-    <div>
-      <p>Your Average Bpm is: {props.bpm}</p>
-      <p>Your Average Body Temp is: {props.bodyTemp}</p>
-      <p>{props.children}</p>
-    </div>
-  );
-};
+class Biometrics extends Component {
+  state = {};
 
-export default biometrics;
+  render() {
+    return (
+      <div class="col-lg-12">
+        <img class="Logo_image" src={this.props.img} />
+        <h1>
+          {this.props.title}{" "}
+          <span class="badge badge-success">{this.props.data}</span>
+        </h1>
+      </div>
+    );
+  }
+}
+
+export default Biometrics;
