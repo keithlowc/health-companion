@@ -20,10 +20,10 @@ class HorizontalChart extends Component {
       <div className="chart">
         <HorizontalBar
           data={this.props.chartData}
-          width={50}
-          height={20}
+          width={750}
+          height={500}
           options={{
-            maintainAspectRatio: true,
+            maintainAspectRatio: false,
             title: {
               display: this.props.displayTitle,
               text: this.props.title_graph,
