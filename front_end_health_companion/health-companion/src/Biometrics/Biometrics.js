@@ -12,6 +12,9 @@ class Biometrics extends Component {
           {this.props.title}{" "}
           <span class="badge badge-success">{this.props.data}</span>
         </h1>
+        <b>
+          Status: <span class="badge badge-primary">{this.props.status}</span>
+        </b>
       </div>
     );
   }
