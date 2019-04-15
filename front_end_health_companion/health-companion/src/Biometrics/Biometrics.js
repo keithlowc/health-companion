@@ -7,7 +7,7 @@ class Biometrics extends Component {
   render() {
     return (
       <div class="col-lg-12">
-        <img class="Logo_image" src={this.props.img} />
+        <img class="Logo_image" alt="jsx-a11y/alt-text" src={this.props.img} />
         <h1>
           {this.props.title}{" "}
           <span class="badge badge-success">{this.props.data}</span>
