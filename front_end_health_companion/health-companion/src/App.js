@@ -198,12 +198,16 @@ class App extends Component {
 
   delete_data = () => {
     console.log("Delete was pressed!");
-    let val_to_delete = this.state.data_size--;
+    let val_to_delete = this.state.data_size;
+    val_to_delete--;
     console.log("The next id to delete: ", val_to_delete);
     let url =
-      "http://healthcompanionv1.herokuapp.com/data" + "/" + val_to_delete;
+      "http://healthcompanionv1.herokuapp.com/data" +
+      "/" +
+      String(val_to_delete);
     axios.delete(url);
     console.log("The url just deleted: ", url);
+    alert("Record number #" + val_to_delete + ". Was deleted!");
   };
 
   render() {
