@@ -45,17 +45,34 @@ class App extends Component {
         let time_array = [];
         let bpm_array = [];
         let body_temp_array = [];
-        let time = "";
+        let time = "No time";
         let size = all_data.length;
         let wanted = 20;
-        let index = size - wanted;
+        let index = wanted - size;
 
-        for (let i = index; i < all_data.length; i++) {
-          time = all_data[i]["time"].split(".")[0].replace("T", " ");
-          time_array.push(time);
-          bpm_array.push(all_data[i]["bpm"]);
-          body_temp_array.push(all_data[i]["bodyTemp"]);
+        if (size >= 20) {
+          for (let i = index; i < all_data.length; i++) {
+            time = all_data[i]["time"].split(".")[0].replace("T", " ");
+            time_array.push(time);
+            bpm_array.push(all_data[i]["bpm"]);
+            body_temp_array.push(all_data[i]["bodyTemp"]);
+          }
+        } else {
+          for (let i = 0; i < all_data.length; i++) {
+            time = all_data[i]["time"].split(".")[0].replace("T", " ");
+            time_array.push(time);
+            bpm_array.push(all_data[i]["bpm"]);
+            body_temp_array.push(all_data[i]["bodyTemp"]);
+          }
         }
+
+        // for (let i = index; i < all_data.length; i++) {
+        //   time = all_data[i]["time"].split(".")[0].replace("T", " ");
+        //   console.log("This is the time", time);
+        //   time_array.push(time);
+        //   bpm_array.push(all_data[i]["bpm"]);
+        //   body_temp_array.push(all_data[i]["bodyTemp"]);
+        // }
 
         let bpm_avg = this.getAverage(bpm_array);
         let body_temp_avg = this.getAverage(body_temp_array);
@@ -199,15 +216,16 @@ class App extends Component {
   delete_data = () => {
     console.log("Delete was pressed!");
     let val_to_delete = this.state.data_size;
-    val_to_delete--;
     console.log("The next id to delete: ", val_to_delete);
     let url =
       "http://healthcompanionv1.herokuapp.com/data" +
       "/" +
       String(val_to_delete);
     axios.delete(url);
+
     console.log("The url just deleted: ", url);
     alert("Record number #" + val_to_delete + ". Was deleted!");
+    val_to_delete--;
   };
 
   render() {

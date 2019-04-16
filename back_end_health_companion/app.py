@@ -44,9 +44,6 @@ class DataSchema(ma.Schema):
 data_schema = DataSchema(strict=True)
 all_data_schema = DataSchema(many=True ,strict=True)
 
-@app.route('', methods['GET'])
-def initial():
-
 
 @app.route('/data',methods=['POST'])
 def add_data():
