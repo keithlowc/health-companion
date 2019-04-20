@@ -23,12 +23,12 @@ class App extends Component {
   }
 
   componentWillMount() {
-    this.getChartData("http://healthcompanionv1.herokuapp.com/data");
+    this.getChartData("https://healthcompanionv1.herokuapp.com/data");
   }
 
   componentDidMount() {
     this.interval = setInterval(
-      () => this.getChartData("http://healthcompanionv1.herokuapp.com/data"),
+      () => this.getChartData("https://healthcompanionv1.herokuapp.com/data"),
       5000
     );
   }
@@ -217,7 +217,7 @@ class App extends Component {
     let val_to_delete = this.state.data_size;
     console.log("The next id to delete: ", val_to_delete);
     let url =
-      "http://healthcompanionv1.herokuapp.com/data" +
+      "https://healthcompanionv1.herokuapp.com/data" +
       "/" +
       String(val_to_delete);
     axios.delete(url);
@@ -252,7 +252,7 @@ class App extends Component {
           <div class="col-md-4 text-center">
             <Biometrics
               data={this.state.bodyTemp}
-              img="http://icons.iconarchive.com/icons/google/noto-emoji-travel-places/256/42650-thermometer-icon.png"
+              img="https://image.flaticon.com/icons/png/512/131/131592.png"
               title="Temp (F): "
               status={this.state.bodyTemp_status}
             />
