@@ -50,7 +50,7 @@ class App extends Component {
         let wanted = 20;
         let index = wanted - size;
 
-        if (size >= 20) {
+        if (size >= wanted) {
           for (let i = index; i < all_data.length; i++) {
             time = all_data[i]["time"].split(".")[0].replace("T", " ");
             time_array.push(time);
@@ -66,13 +66,10 @@ class App extends Component {
           }
         }
 
-        // for (let i = index; i < all_data.length; i++) {
-        //   time = all_data[i]["time"].split(".")[0].replace("T", " ");
-        //   console.log("This is the time", time);
-        //   time_array.push(time);
-        //   bpm_array.push(all_data[i]["bpm"]);
-        //   body_temp_array.push(all_data[i]["bodyTemp"]);
-        // }
+        // We don't want to iterate over everything
+        // And recreate the whole array
+        // We just want to add the new amount
+        // And pop out the old amount
 
         let bpm_avg = this.getAverage(bpm_array);
         let body_temp_avg = this.getAverage(body_temp_array);
@@ -124,30 +121,32 @@ class App extends Component {
             labels: time_array,
             datasets: [
               {
-                label: "Beats Per Minute",
+                label: "Body Temperature",
                 data: body_temp_array,
                 backgroundColor: [
-                  "rgba(255, 99, 132, 0.6)",
                   "rgba(54, 162, 235, 0.6)",
                   "rgba(255, 206, 86, 0.6)",
-                  "rgba(75, 192, 192, 0.6)",
-                  "rgba(153, 102, 255, 0.6)",
-                  "rgba(255, 159, 64, 0.6)",
-                  "rgba(255, 99, 132, 0.6)",
-                  "rgba(255, 99, 132, 0.6)",
                   "rgba(54, 162, 235, 0.6)",
                   "rgba(255, 206, 86, 0.6)",
-                  "rgba(75, 192, 192, 0.6)",
-                  "rgba(153, 102, 255, 0.6)",
-                  "rgba(255, 159, 64, 0.6)",
-                  "rgba(255, 99, 132, 0.6)",
-                  "rgba(255, 99, 132, 0.6)",
                   "rgba(54, 162, 235, 0.6)",
                   "rgba(255, 206, 86, 0.6)",
-                  "rgba(75, 192, 192, 0.6)",
-                  "rgba(153, 102, 255, 0.6)",
-                  "rgba(255, 159, 64, 0.6)",
-                  "rgba(255, 99, 132, 0.6)"
+                  "rgba(54, 162, 235, 0.6)",
+                  "rgba(255, 206, 86, 0.6)",
+                  "rgba(54, 162, 235, 0.6)",
+                  "rgba(255, 206, 86, 0.6)",
+                  "rgba(54, 162, 235, 0.6)",
+                  "rgba(255, 206, 86, 0.6)",
+                  "rgba(54, 162, 235, 0.6)",
+                  "rgba(255, 206, 86, 0.6)",
+
+                  "rgba(54, 162, 235, 0.6)",
+                  "rgba(255, 206, 86, 0.6)",
+                  "rgba(54, 162, 235, 0.6)",
+                  "rgba(255, 206, 86, 0.6)",
+                  "rgba(54, 162, 235, 0.6)",
+                  "rgba(255, 206, 86, 0.6)",
+                  "rgba(54, 162, 235, 0.6)",
+                  "rgba(255, 206, 86, 0.6)"
                 ]
               }
             ]
@@ -236,7 +235,7 @@ class App extends Component {
             <div class="row ">
               <Biometrics
                 data={this.state.bpm}
-                img="https://cdn4.iconfinder.com/data/icons/medical-32/512/medic2-512.png"
+                img="https://www.shareicon.net/download/2016/10/12/843248_heart_512x512.png"
                 title="Bpm: "
                 status={this.state.bpm_status}
               />
