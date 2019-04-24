@@ -9,8 +9,10 @@ import os
 
 app = Flask(__name__)
 
+# Comment this out for deployment
 # basedir = os.path.abspath(os.path.dirname(__file__))
 # app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(basedir, 'db.sqlite')
+
 
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
@@ -43,6 +45,21 @@ class DataSchema(ma.Schema):
 # init schema
 data_schema = DataSchema(strict=True)
 all_data_schema = DataSchema(many=True ,strict=True)
+
+@app.route('/', methods=['GET'])
+def initial():
+	return ''' <h1>Backend for Health Companion</h1>
+	<h2>Created by Keith Low for healthcompanionfev1.herokuapp.com</h2>
+	<ul>
+		<li>Routes</li>
+		<h2>healthCompanion.herokuapp.com/data</h2>
+		<li>Shows all the data saved into the db</li>
+		<h2>healthCompanion.herokuapp.com/data/1</h2>
+		<li>Shows the piece of data with id 1</li>
+		<h2>healthCompanion.herokuapp.com/data/averages</h2>
+	</ul>
+
+	'''
 
 
 @app.route('/data',methods=['POST'])
@@ -92,6 +109,25 @@ def delete_products(id):
 	db.session.commit()
 
 	return data_schema.jsonify(data)
+
+@app.route('/data/averages', methods=['GET'])
+def get_averages():
+	all_data = Data.query.all()
+	result = all_data_schema.dump(all_data)
+	total_bpm = 0
+	total_temperature = 0
+
+	for x in range(len(result.data)):
+		total_bpm += result.data[x]['bpm']
+		total_temperature += result.data[x]['bodyTemp']
+
+	total_bpm = total_bpm / len(result.data)
+	total_temperature = total_temperature / len(result.data)
+
+	return jsonify({
+		'average_bpm': total_bpm,
+		'average_temp': total_temperature,
+		})
 
 
 if __name__ == '__main__':

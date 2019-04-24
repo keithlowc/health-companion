@@ -38,11 +38,12 @@ class Twilio:
 if __name__ == '__main__':
 	account_sid = input('Enter account_sid:\n')
 	auth_token = input('Enter auth_token:\n')
-	TwilioNumber = input('Enter TwilioNumber:\n')
+	my_phone = input('Enter Your Phone number ("+13156668888"):\n')
+	TwilioNumber = input('Enter Your twilio number ("+13156668888"):\n')
 	message = input('Enter message:\n')
 	x = Twilio(account_sid=account_sid,
 				auth_token=auth_token,
-				myPhone=TwilioNumber,
+				myPhone=my_phone,
 				TwilioNumber=TwilioNumber,
 				message=message)
 	x.send_text()
