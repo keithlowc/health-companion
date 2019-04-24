@@ -1,12 +1,29 @@
-# Health Companion Arduino NANO version
+# Health Companion 
 
+* This is the official repository of Health companion, a device that measures biometrics looking for malicious patterns and contacts emergency services if needed
 
-# References:
+## Rpi3_code
 
-## For DS18B20 temperature sensor we need the following libraries:
+* Main file for functionality on device
 
-1- Following this tutorial
-https://create.arduino.cc/projecthub/TheGadgetBoy/ds18b20-digital-temperature-sensor-and-arduino-9cc806
+## back_end_health_companion
 
-2- Onewire library (Taken from tutorial)
-3-https://github.com/milesburton/Arduino-Temperature-Control-Library (Dallas temperature library)
+* Back end made with Python Flask (REST API)
+* [Back-End](https://healthcompanionv1.herokuapp.com) 
+
+## front_end_health_companion
+
+* Front end made with ReactJs
+* [Front-End](https://healthcompanionfev1.herokuapp.com/)
+
+## Arduino Code
+
+* Some code written in C++ for the arduino Nano
+* Uses the same sensors than the RPI3
+
+## Tech Stack:
+
+* Python3
+* React Js
+* C++ 
+* Heroku (Cloud services)

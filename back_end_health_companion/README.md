@@ -1,4 +1,4 @@
-# Back end
+# Back end for Healthcompanionfev1.herokuapp.com
 
 ## To make a POST and GET request
 
@@ -21,11 +21,21 @@ You can use Postman to send this post request and write into the db
 
 ## To deploy on Heroku
 
+* Make sure your application has Heroku Postgres on it (Hobby dev is the free version)
+
 * git init
 * git heroku create <APPNAME>
 * git add .
 * git commit -am "MESSAGE FOR COMMIT"
+* git push heroku master
 * Run python shell > Heroku run python > from app import db ---> db.create_all() (This will create the db and allow you to work with it locally)
+
+## To delete the database
+* Click into your heroku app
+* Click into installed add ons 
+* Settings 
+* Reset database 
+* After this you will probably need to re-run on the console - Heroku run python > from app import db > db.create_all()
 
 ## Resources
 
