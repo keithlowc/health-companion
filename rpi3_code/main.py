@@ -1,7 +1,7 @@
 from config import TwilioKeys, DeviceSettings
 from src.communications.twilio_coms import Twilio
 from src.temperature.temperature import TemperatureSensor
-from src.gas.gas_sensor import GasSensor
+# from src.gas.gas_sensor import GasSensor
 from src.pulse.pulse_sensor import Pulsesensor
 
 import time
@@ -20,17 +20,17 @@ def communication(temperature,pulse):
 	message.make_call()
 	message.send_text()
 
-def gas_sensing():
-	try:
-		gas = GasSensor()
-		co2, tvoc, temp = gas.get_gas()
-		return co2, tvoc, temp
-	except Exception as e:
-		print('There was an ERROR in gas sensing: ' + str(e))
-		co2 = 'Null'
-		tvoc = 'Null'
-		temp = 'Null'
-		return co2, tvoc, temp
+# def gas_sensing():
+# 	try:
+# 		gas = GasSensor()
+# 		co2, tvoc, temp = gas.get_gas()
+# 		return co2, tvoc, temp
+# 	except Exception as e:
+# 		print('There was an ERROR in gas sensing: ' + str(e))
+# 		co2 = 'Null'
+# 		tvoc = 'Null'
+# 		temp = 'Null'
+# 		return co2, tvoc, temp
 
 def temperature_sensing():
 	temp = TemperatureSensor()
