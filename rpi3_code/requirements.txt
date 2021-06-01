@@ -25,4 +25,4 @@ SecretStorage==2.3.1
 six==1.11.0
 spidev==3.2
 twilio==6.19.2
-urllib3==1.24.1
+urllib3==1.26.5
