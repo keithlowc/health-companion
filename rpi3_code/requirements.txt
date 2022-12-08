@@ -3,7 +3,7 @@ Adafruit-CCS811==0.2.1
 Adafruit-GPIO==1.0.3
 Adafruit-PureIO==0.2.3
 asn1crypto==0.24.0
-certifi==2018.10.15
+certifi==2022.12.7
 chardet==3.0.4
 cryptography==1.7.1
 enum34==1.1.6
